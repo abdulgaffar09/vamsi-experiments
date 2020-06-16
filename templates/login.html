@@ -1,0 +1,20 @@
+{% include 'index.html' %}
+
+
+{% block content %}
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+
+
+    {{ form }}
+    <button type="submit">Submit</button>
+    <button type="reset">Cancel</button>
+
+
+        </form>
+
+
+
+</div>
+{% endblock %}

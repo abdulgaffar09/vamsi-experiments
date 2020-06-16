@@ -1,0 +1,141 @@
+
+
+<head>
+    <style>
+            .content {
+    min-height: 100vh;
+    height: auto;
+    transition: all 0.2s ease-in-out;
+    }
+
+    .button-collapse {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 10;
+    }
+
+    @media(min-width: 1440px) {
+    .content {
+    padding-left: 250px;
+    }
+    }
+    </style>
+</head>
+
+<body>
+
+
+  <a href="#" data-activates="slide-out" class="btn-floating blue-gradient button-collapse btn-lg"><i
+      class="fas fa-bars"></i></a>
+
+  <div id="slide-out" class="side-nav fixed">
+    <ul class="custom-scrollbar">
+
+      <li>
+        <div class="logo-wrapper waves-light">
+          <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
+              class="img-fluid flex-center"></a>
+        </div>
+      </li>
+
+      <li>
+        <form class="search-form" role="search">
+            {% csrf_token %}
+          <div class="form-group md-form mt-0 pt-1 waves-light">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+
+        </form>
+      </li>
+
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-chevron-right"></i> Submit
+              blog<i class="fas fa-angle-down rotate-icon"></i></a>
+            <div class="collapsible-body">
+              <ul>
+
+                <li><a href="{% url 'categoryform' user.name %}" class="waves-effect">Register Urself</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+
+
+          <li><a class="collapsible-header waves-effect arrow-r"><i class="far fa-envelope"></i> Contact me<i
+                class="fas fa-angle-down rotate-icon"></i></a>
+            <div class="collapsible-body">
+              <ul>
+                {% if user %}
+                <li><a href="#">{{user.name}}</a></li>
+                {% endif %}
+                <li><a href="{% url 'myforms' user.id %}">My Forms</a></li>
+                <li><a href="#" class="waves-effect">FAQ</a>
+                </li>
+                <li><a href="#" class="waves-effect">Write a message</a>
+                </li>
+
+
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+    <div class="sidenav-bg rgba-blue-strong"></div>
+  </div>
+
+  <div id="content" class="sunny-morning-gradient color-block content">
+
+
+  </div>
+  <div >
+
+    {% include 'messages.html' %}
+
+        </div>
+<script>
+    $(document).ready(function() {
+let isOpen = false;
+let $windowWidth = $( window ).width();
+const $btnCollapse = $(".button-collapse");
+const $content = $('#content');
+
+$( window ).resize(function() {
+
+$windowWidth = $( window ).width();
+if($windowWidth > 1440) {
+$content.css('padding-left', '250px');
+if(isOpen) {
+$btnCollapse.css('left', '0');
+isOpen = false;
+}
+} else if($windowWidth < 530 && isOpen) { $btnCollapse.css('left', '0' ); $content.css('padding-left', '0' );
+  $('#sidenav-overlay').css('display', 'block' ); $btnCollapse.trigger('click'); } else { if(!isOpen) {
+  $content.css('padding-left', '0' ); } } }); // SideNav Button Initialization $btnCollapse.sideNav();
+  $btnCollapse.on('click', ()=> {
+  isOpen = !isOpen;
+  if($windowWidth > 530) {
+  const elPadding = isOpen ? '250px' : '0';
+  $btnCollapse.css('left', elPadding);
+  $content.css('padding-left', elPadding);
+  $('#sidenav-overlay').css('display', 'none');
+  } else {
+  $('#sidenav-overlay').on('click', () => {
+  isOpen = !isOpen;
+  });
+  }
+  });
+  $('#sidenav-overlay').on('click', () => {
+  isOpen = !isOpen;
+  });
+  });
+</script>
+
+
+
+</body>
+

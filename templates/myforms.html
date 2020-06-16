@@ -1,0 +1,8 @@
+<ul>
+{% for form in Category %}
+    <li>
+        <a href="{% url 'form' form.id cat %}">Reference Id:{{ form.id }}</a>
+    <br/>
+</li>
+{% endfor %}
+    </ul>

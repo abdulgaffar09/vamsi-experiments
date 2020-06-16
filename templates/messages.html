@@ -1,0 +1,20 @@
+
+{% load i18n %}
+
+
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {% blocktrans %}
+    {{ message }}
+    {% endblocktrans %}
+
+    <!--
+    {% block content %}
+    name={{ message }}
+    {% endblock %}}
+    -->
+  </div>
+{% endfor %}
